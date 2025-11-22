@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+@theme {
+  --font-sans: 'Cairo', sans-serif;
+
+  --color-dark-bg: #0f172a;
+  --color-dark-card: #1e293b;
+  --color-dark-text: #f8fafc;
+  --color-dark-muted: #94a3b8;
+  --color-dark-border: #334155;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply font-sans text-gray-900 bg-gray-50 dark:bg-dark-bg dark:text-dark-text transition-colors duration-200;
+  }
+
+  /* Autofill fix for dark mode */
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover,
+  .dark input:-webkit-autofill:focus,
+  .dark input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
+    -webkit-text-fill-color: #f8fafc !important;
+    caret-color: #f8fafc;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white dark:bg-dark-card rounded-xl shadow-sm border border-gray-100 dark:border-dark-border p-6 transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-white dark:bg-dark-card text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-dark-border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium cursor-pointer;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium cursor-pointer;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white dark:bg-dark-bg text-gray-900 dark:text-dark-text placeholder-gray-400 dark:placeholder-gray-500;
+  }
+
+  .table-header {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider bg-gray-50 dark:bg-gray-800/50;
+  }
+
+  .table-cell {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+}
